@@ -369,7 +369,7 @@ class Delve {
 	}
 
 	close() {
-		if (this.debugProcess) {
+		if (!this.debugProcess) {
 			this.call<DebuggerState>('Command', [{ name: 'halt' }], (err, state) => {
 				if (err) return logError('Failed to halt.');
 				this.call<DebuggerState>('Restart', [], (err, state) => {
@@ -378,8 +378,9 @@ class Delve {
 			});
 		logError('Debug Session halted.');
 		} else {
-			killTree(this.debugProcess.pid);
-		}
+			logError('Calling KillTree.');
+            killTree(this.debugProcess.ppid);
+			}
 	}
 }
 
