@@ -378,8 +378,8 @@ class Delve {
 			});
 		logError('Debug Session halted.');
 		} else {
-			logError('Calling KillTree.');
-            killTree(this.debugProcess.ppid);
+			logError('Not Calling KillTree.');
+        // killTree(this.debugProcess.ppid);
 			}
 	}
 }
