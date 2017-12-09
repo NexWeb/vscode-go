@@ -376,10 +376,9 @@ class Delve {
 					if (err) return logError('Failed to restart.');
 				});
 			});
-		logError('Debug Session halted.');
-		} else {
-			logError('Not Calling KillTree.');
-        // killTree(this.debugProcess.ppid);
+			} else {
+			logError("Calling KillTree.")
+            killTree(this.debugProcess.pid);
 			}
 	}
 }
@@ -884,8 +883,8 @@ function killTree(processId: number): void {
 	} else {
 		// on linux and OS X we kill all direct and indirect child processes as well
 		try {
-			const cmd = path.join(__dirname, '../../../scripts/terminateProcess.sh');
-			spawnSync(cmd, [processId.toString()]);
+		 logError("Killing Debug Process")
+         this.debugProcess.detach(true);
 		} catch (err) {
 		}
 	}
